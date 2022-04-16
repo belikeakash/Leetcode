@@ -25,19 +25,14 @@ public:
         if(sum==x) cnt++;
         sum-=root->val;
     }
-    void st(TreeNode* root, int x) {
-        if(root==NULL) return;
-        ll sum = 0;
-        DFS(root,x,sum);
-        if(root->left) {
-            st(root->left,x);
-        }
-        if(root->right) {
-            st(root->right,x);
-        }
-    }
+  
     int pathSum(TreeNode* root, int x) {
-        st(root,x);
+        if(root) {
+            ll sum = 0;
+            DFS(root,x,sum);
+            pathSum(root->left,x);
+            pathSum(root->right,x);
+        }
         return cnt;
     }
 };
