@@ -2,16 +2,12 @@ class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& a) {
         int n = a.size();
-        vector<int>b(n,0);
+        vector<int>b(101,0);
+        for(int i=0;i<n;i++) b[a[i]]++;
+        for(int i=1;i<101;i++) b[i] += b[i-1];
         for(int i=0;i<n;i++) {
-            b[i] = a[i];
-        }
-        sort(a.begin(),a.end());
-        // vector<int>ans(n,0);
-        map<int,int>m;
-        for(int i=n-1;i>=0;i--) m[a[i]] = i;
-        for(int i=0;i<n;i++) {
-            a[i] = m[b[i]];
+            if(a[i]==0) a[i] = 0;
+            else a[i] = b[a[i]-1];
         }
         return a;
     }
