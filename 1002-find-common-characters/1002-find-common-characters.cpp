@@ -7,14 +7,16 @@ public:
             string s = a[0];
             v[s[j]-'a']++;
         }
+        vector<int>d(26,0);
         for(int i=1;i<a.size();i++) {
-            vector<int>d(26,0);
+            
             for(int j=0;j<a[i].size();j++) {
                 string s = a[i];
                 d[s[j]-'a']++;
             }
             for(int j=0;j<26;j++) {
                 v[j] = min(v[j],d[j]);
+                d[j]=0;
             }
         }
         vector<string>ans;
