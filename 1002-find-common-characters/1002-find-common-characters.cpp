@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<string> commonChars(vector<string>& a) {
-        map<int,int>bm;
         vector<int>v(26,0);
         for(int j=0;j<a[0].size();j++) {
             string s = a[0];
