@@ -1,15 +1,14 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& a) {
-        vector<int>v(10004,0);
         int n = a.size();
-        for(auto x:a) v[abs(x)]++;
+        int i=0,j=n-1;
         vector<int>ans;
-        for(int i=0;i<10004;i++) {
-            if(v[i]>0) {
-                while(v[i]-->0) ans.push_back(i*i);
-            }
+        while(i<=j) {
+            if(a[i]*a[i]>a[j]*a[j]) {ans.push_back(a[i]*a[i]); i++;}
+            else {ans.push_back(a[j]*a[j]);j--;}
         }
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
