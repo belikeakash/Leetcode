@@ -10,10 +10,11 @@ public:
         int cnt = 0,i;
         for(i=0;i<n;i++) {
             y+=a[i];
-            if(y==x) {cnt++; y=0; if(cnt==2)break;}
+            if(y==x) {cnt++; y=0; if(cnt==3)break;}
         }
-        if(cnt==2 && sum-2*x==x && i<n-1) return 1;
-        // if(cnt==3) return 1;
+        
+        // if(cnt==2 && sum-2*x==x && i<n-1) return 1;
+        if(cnt==3) return 1;
         return 0;
     }
 };
