@@ -1,11 +1,23 @@
 class Solution {
 public:
     int arrayPairSum(vector<int>& a) {
-        sort(a.begin(),a.end());
-        int ans = 0;
-        for(int i=0;i<a.size();i+=2) {
-            ans += min(a[i],a[i+1]);
+        vector<int>v(20004,0);
+        for(auto x:a) {
+            v[x+10000]++;
         }
-        return ans;
+        int sum = 0;
+        int flag = 1;
+        int i=0;
+        for(auto x:v) {
+            while(x>0) {
+                if(flag) {
+                    sum += i-10000;
+                }
+                flag = !flag;
+                x--;
+            }
+            i++;
+        }
+        return sum;
     }
 };
