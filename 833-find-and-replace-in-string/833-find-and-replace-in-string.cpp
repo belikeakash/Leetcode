@@ -8,21 +8,24 @@ public:
         string ans = "";
         for(int i=0;i<s.size();i++) {
             if(m.find(i)!=m.end()) {
+                int p = m[i].first.size();
                 string temp = "";
-                int k = 0;
+                int st = 0;
                 int j = i;
-                int len = m[i].first.size();
-                while(j<s.size() && k<len) {
-                    if(s[j++]==m[i].first[k]) temp.push_back(m[i].first[k++]);
-                    else break;
+                while(st<p && j<s.size()) {
+                    temp += s[j];
+                    j++;
+                    st++;
                 }
+                cout<<temp<<endl;
                 if(temp==m[i].first) {
                     ans+=m[i].second;
                     i=j-1;
                     continue;
                 }
             }
-            ans.push_back(s[i]);
+            ans+=s[i];
+            
         }
         return ans;
     }
