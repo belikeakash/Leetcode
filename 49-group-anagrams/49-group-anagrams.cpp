@@ -2,8 +2,9 @@ class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& v) {
         map<vector<int>,vector<string>>m;
+        vector<int>a(26,0);
         for(auto x:v) {
-            vector<int>a(26,0);
+            for(int i=0;i<26;i++) a[i] = 0;
             for(auto y:x) a[y-'a']++;
             m[a].push_back(x);
         }
