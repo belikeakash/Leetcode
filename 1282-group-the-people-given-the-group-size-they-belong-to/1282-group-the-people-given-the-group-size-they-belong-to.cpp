@@ -7,21 +7,16 @@ public:
         unordered_map<int,vector<int>>m;
         for(int i=0;i<n;i++) {
             m[a[i]].push_back(i);
-        }
-        for(auto x:m) {
-            int i = 0;
-            while(i<x.second.size()) {
-                    vector<int>b;  
-                    for(int j=0;j<x.first;j++) {
-                        b.push_back(x.second[i]);
-                        i++;
-                    }
+            if(m[a[i]].size()==a[i]) {
+                vector<int>b;
+                for(auto x:m[a[i]]) {
+                    b.push_back(x);
+                }
+                m[a[i]].clear();
                 ans.push_back(b);
             }
-            
-            
-            
         }
+        
         return ans;
     }
 };
