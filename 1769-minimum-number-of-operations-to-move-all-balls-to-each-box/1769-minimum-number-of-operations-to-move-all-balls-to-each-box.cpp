@@ -1,35 +1,33 @@
 class Solution {
 public:
     vector<int> minOperations(string s) {
+        vector<int>a;
         int n = s.size();
-        vector<int>ans(n,0);
-        vector<int>l(n,0),r(n,0);
-        int x = 0;
+        int cnt = 0;
+        int ans = 0;
         for(int i=0;i<n;i++) {
-            if(s[i]=='1') {
-                x++;
-                ans[0]+=i;
-            }
-            l[i]=x;
+            
+            ans+=cnt;
+            a.push_back(ans);
+            if(s[i]=='1') cnt++;
         }
-        x=0;
-        for(int i=n-1;i>=0;i--) {
-            if(s[i]=='1') x++;
-            r[i]=x;
+        for(auto u:a) {
+            cout<<u<<" ";
         }
-        // reverse(r.begin(),r.end());
-        x=0;
-        // for(int i=1;i<n;i++) {
-        //     if(s[i]=='1') ans[0]+=i;
-        // }
-        // ans[0] = x;
-        for(auto x:l) cout<<x<<" ";
-        cout<<endl;
-        for(auto x:r) cout<<x<<" ";
+        int x = 0;
+        int p = 0;
         for(int i=1;i<n;i++) {
-            ans[i] = ans[i-1] + l[i-1] - r[i];
-            // if(s[i]=='1') ans[i]-=2;
+            if(s[i]=='1') p+=i;
         }
-        return ans;
+        vector<int>y;
+        y.push_back(p);
+        if(s[0]=='1')cnt--;
+        for(int i=1;i<n;i++){
+         
+            p = p - (cnt);
+               if(s[i]=='1') cnt--;
+            y.push_back(p+a[i]);
+        }
+        return y;
     }
 };
