@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<string> findAndReplacePattern(vector<string>& v, string s) {
         string a1 = "";
-        map<char,int>m1;
+        unordered_map<char,int>m1;
         int p = 1;
         for(int i=0;i<s.size();i++) {
             if(m1[s[i]]==0) {m1[s[i]] = p; p++;}
@@ -16,7 +16,7 @@ public:
         for(auto x:v) {
             string a2 = "";
             p = 1;
-            map<char,int>m2;
+            unordered_map<char,int>m2;
             for(int i=0;i<x.size();i++) {
                if(m2[x[i]]==0) {m2[x[i]] = p; p++;}
                 a2+=to_string(m2[x[i]]);
