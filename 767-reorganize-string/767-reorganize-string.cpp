@@ -1,39 +1,34 @@
 class Solution {
 public:
     string reorganizeString(string s) {
-        map<char,int>m;
-        for(auto x:s) m[x]++;
-        for(auto x:m) {
-            if(x.second>(s.size() - 1)/2 + 1) return "";
+        unordered_map<char,int>m;
+        int maxi = 0;
+        for(auto x:s) {
+            m[x]++;
+            maxi = max(maxi,m[x]);
         }
-        string ans = "";
-        vector<pair<int,char>>v;
+        if(maxi > (s.size()-1)/2 + 1 ) return "";
+        string s1 = "";
+        vector<pair<int,int>>v;
         for(auto x:m) {
-            // cout<<x.second<<" "<<x.first<<endl;
             v.push_back({x.second,x.first});
         }
         sort(v.begin(),v.end());
         reverse(v.begin(),v.end());
-        
-        // s = "";
-        // for(auto x:v) {
-        //     cout<<x.first<<" "<<x.second<<endl;;
-        // }
-        // reverse(s.begin(),s.end());
-        int j = 0;
-        // cout<<v[j].first<<endl;
-        for(int i=0;i<s.size();i=i+2) {
-            if(v[j].first<=0)j++;
-            cout<<v[j].first<<" ";
-            s[i] = v[j].second;
-            v[j].first--;
+        for(auto x:v) {
+            while(x.first--) {
+                s1+=x.second;
+            } 
         }
-        for(int i=1;i<s.size();i=i+2) {
-            if(v[j].first<=0)j++;
-            cout<<v[j].first<<" ";
-            s[i] = v[j].second;
-            v[j].first--;
+        cout<<s1<<" ";
+        string ans = s1;
+        int n = s1.size();
+        for(int i=0;i<n;i+=2) {
+            ans[i] = s1[i/2];
         }
-        return s;
+        for(int i=1;i<n;i+=2) {
+            ans[i] = s1[(i+n)/2];
+        }
+        return ans;
     }
 };
