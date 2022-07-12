@@ -14,7 +14,7 @@ public:
         ListNode* a = head;
         if(a==NULL) return head;
         ListNode* b = head->next;
-        if(a==NULL || b==NULL) return head;
+        // if(a==NULL || b==NULL) return head;
         
         while(b!=NULL) {
             auto c = b->next;
