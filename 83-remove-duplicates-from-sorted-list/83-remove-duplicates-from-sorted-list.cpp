@@ -20,6 +20,7 @@ public:
                 a->next = c->next;
                 b = c->next;
                 c->next = NULL;
+                delete c;
             }
             else {
                 a = b;
