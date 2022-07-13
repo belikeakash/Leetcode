@@ -11,14 +11,25 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        string s = "";
-        while(head) {
-            s+=head->val;
-            head=head->next;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = NULL;
+        ListNode* temp;
+        stack<int>s;
+        while(fast && fast->next) {
+            fast = fast->next->next;
+            s.push(slow->val);
+            slow = slow->next;
         }
-        for(int i=0;i<s.size();i++) {
-            if(s[i]!=s[s.size()-1-i]) return 0;
+        if(fast) slow = slow->next;
+        while(!s.empty()) {
+            if(s.top()!=slow->val) return 0;
+            s.pop();
+            slow=slow->next;
         }
+        cout<<endl;
         return 1;
+        
+     
     }
 };
