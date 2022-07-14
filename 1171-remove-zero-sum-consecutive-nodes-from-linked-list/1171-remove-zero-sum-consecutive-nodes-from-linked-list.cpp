@@ -11,27 +11,21 @@
 class Solution {
 public:
     ListNode* removeZeroSumSublists(ListNode* head) {
-        unordered_map<int,ListNode*>m;
-        ListNode* temp = head;
-        ListNode* newhead = head;
-        int sum = 0;
-        bool flag = 0;
-        while(temp!=NULL) {
-            sum+=temp->val;
-            if(sum==0) {
-                newhead = temp->next;
-                flag = 1;
+        ListNode* temp = new ListNode(0);
+        ListNode* i = temp;
+        i->next = head;
+        while(i!=NULL) {
+            int sum = 0;
+            ListNode* j = i->next;
+            while(j!=NULL) {
+                sum+=j->val;
+                if(sum==0) {
+                    i->next = j->next;
+                }
+                j=j->next;
             }
-            else if(m[sum]) {
-                m[sum]->next = temp->next;
-                flag = 1;
-            }
-            else {
-                m[sum] = temp;
-            }
-            temp=temp->next;
+            i=i->next;
         }
-        if(flag) removeZeroSumSublists(newhead);
-        return newhead;
+        return temp->next;
     }
 };
