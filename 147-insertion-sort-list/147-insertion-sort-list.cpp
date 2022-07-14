@@ -16,14 +16,17 @@ public:
         ListNode* pre = NULL;
         if(!temp2) return temp1;
         int flag = 1;
-        int x = 5002;
-        while(x--) {
+        int x = 1;
+        while(x==1 || flag==1) {
+            x = 0;
         temp1 = head;
         temp2 = head->next;
         pre = NULL;
+            flag = 0;
             while(temp2) {
                 // cout<<temp2->val<<" "<<temp1->val<<" "<<head->val<<endl;
                 if(temp1->val > temp2->val ) {
+                    flag = 1;
                 if(temp1 == head) {
                     temp1->next = temp2->next;
                     temp2->next = temp1;
