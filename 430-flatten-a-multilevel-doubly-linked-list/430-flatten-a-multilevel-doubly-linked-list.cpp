@@ -11,29 +11,27 @@ public:
 
 class Solution {
 public:
-    Node* flatte(Node* head) {
-        if(head==NULL) return NULL;
+  
+
+    Node* flatten(Node* head) {
+        if(head==NULL) return head;
         Node* a = head;
-        while(a!=NULL) {
+        while(a) {
             if(a->child) {
-                auto x = flatte(a->child);
-                Node* c = x;
+                Node* child = flatten(a->child);
                 Node* next = a->next;
                 a->child = NULL;
-                while(c->next) {
-                    c=c->next;
+                a->next = child;
+                child->prev = a;
+                Node* d = child;
+                while(d->next) {
+                    d=d->next;
                 }
-                a->next = x;
-                x->prev = a;
-                c->next = next;
-                if(next) next->prev = c;
+                d->next = next;
+                if(next) next->prev = d;
             }
             a=a->next;
         }
         return head;
-}
-    Node* flatten(Node* head) {
-        auto x = flatte(head);
-        return x;
     }
 };
