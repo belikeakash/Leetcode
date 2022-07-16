@@ -11,25 +11,24 @@
  */
 class Solution {
 public:
-    TreeNode* constructMaximumBinaryTree(vector<int>& a) {
-        if(a.size()==0) return NULL;
-        priority_queue<int>q;
-        for(auto x:a) {
-            q.push(x);
+    TreeNode* func(vector<int>&a, int s, int e) {
+        if(s>e) return NULL;
+        int x = -1;
+        int pos = -1;
+        for(int i=s;i<=e;i++) {
+            if(a[i]>x) {
+                x = a[i];
+                pos = i;
+            }
         }
-        int u = q.top();
-        TreeNode* root = new TreeNode(u);
-        vector<int>x1,x2;
-        int i = 0;
-        // int n = a.size();
-        for(i=0;i<a.size();i++) {
-            if(a[i]!=u) x1.push_back(a[i]);
-            else break;
-        }
-        for(int j = i+1;j<a.size();j++) x2.push_back(a[j]);
-        for(auto x:x2) cout<<x<<" ";
-        root->left = constructMaximumBinaryTree(x1);
-        root->right = constructMaximumBinaryTree(x2);
+        TreeNode* root = new TreeNode(x);
+        root->left = func(a,s,pos-1);
+        root->right = func(a,pos+1,e);
+        
         return root;
+    }
+    TreeNode* constructMaximumBinaryTree(vector<int>& a) {
+        int n = a.size();
+        return func(a,0,n-1);
     }
 };
