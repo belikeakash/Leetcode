@@ -11,28 +11,29 @@
  */
 class Solution {
 public:
-    void DFS(TreeNode* root, vector<int>& a) {
-        if(root==NULL) return ;
-        if(root->left) DFS(root->left,a);
-        a.push_back(root->val);
-        if(root->right) DFS(root->right,a);
-    }
+    
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
-        vector<int>v1,v2,ans;
-        DFS(root1,v1);
-        DFS(root2,v2);
-        int i = 0,j=0;
-        while(i<v1.size() && j<v2.size()) {
-            if(v1[i]<v2[j]) {ans.push_back(v1[i]); i++;}
-            else {ans.push_back(v2[j]); j++;}
-        }
-        while(i<v1.size()) {
-            ans.push_back(v1[i]);
-            i++;
-        }
-        while(j<v2.size()) {
-            ans.push_back(v2[j]);
-            j++;
+        stack<TreeNode*>s1,s2;
+        vector<int>ans;
+        while(!s1.empty() || !s2.empty() || root1 || root2) {
+            while(root1!=NULL) {
+                s1.push(root1);
+                root1=root1->left;
+            }
+            while(root2!=NULL) {
+                s2.push(root2);
+                root2=root2->left;
+            }
+            if(s2.empty() || (!s1.empty() && s1.top()->val <= s2.top()->val)) {
+                ans.push_back(s1.top()->val);
+                root1=s1.top()->right;
+                s1.pop();
+            }
+            else {
+                ans.push_back(s2.top()->val);
+                root2=s2.top()->right;
+                s2.pop();
+            }
         }
         return ans;
     }
