@@ -11,28 +11,13 @@
  */
 class Solution {
 public:
-    void DFS(TreeNode* root, unordered_map<TreeNode*,TreeNode*>&m) {
-        if(root==NULL) return;
-        if(root->left) {
-            m[root->left] = root;
-            DFS(root->left,m);
-        }
-        if(root->right) {
-            m[root->right] = root;
-            DFS(root->right,m);
-        }
-    }
-    void func(TreeNode* root, unordered_map<TreeNode*,int>m, TreeNode* &ans, int n) {
-        if(root==NULL) return;
-        if(m[root]==n) {
-            ans = root;
-        }
-        if(root->left) {
-            func(root->left,m,ans,n);
-        }
-        if(root->right) {
-            func(root->right,m,ans,n);
-        }
+    TreeNode* findLCA(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL || root==p || root==q) return root;
+        TreeNode* left = findLCA(root->left,p,q);
+        TreeNode* right = findLCA(root->right,p,q);
+        if(left==NULL) return right;
+        else if(right==NULL) return left;
+        else return root;
     }
     TreeNode* lcaDeepestLeaves(TreeNode* root) {
         vector<TreeNode*>v;
@@ -50,33 +35,6 @@ public:
             }
         }
         
-        unordered_map<TreeNode*,TreeNode*>m1;
-        m1[root] = NULL;
-        DFS(root,m1);
-        unordered_map<TreeNode*,int>m2;
-        for(int i = 0;i<v.size();i++) {
-            auto x = v[i];
-            // cout<<x->val<<" ";
-            while(x!=NULL) {
-                m2[x]++;
-                x = m1[x];
-                
-            }
-            
-        }
-        
-        int maxi = 0;
-        TreeNode* ans = NULL;
-        for(auto x:m2) {
-            if(x.second==v.size()) {
-                maxi = x.second;
-                ans = x.first;
-                // cout<<ans->val<<" ";
-            }
-            cout<<x.first->val<<"->"<<x.second<<"  ";
-        }
-        func(root,m2,ans,v.size());
-        cout<<endl;
-        return ans;;
+        return findLCA(root,v[0],v[v.size()-1]);
     }
 };
