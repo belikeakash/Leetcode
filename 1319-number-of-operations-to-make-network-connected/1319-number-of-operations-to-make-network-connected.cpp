@@ -1,15 +1,16 @@
 class Solution {
 public:
-    vector<int>ar[100006];
-    int vis[100006];
-    void DFS(int node) {
+    
+    void DFS(int node, vector<vector<int>>&ar, vector<int>&vis) {
         vis[node] = 1;
         for(int x:ar[node]) {
-            if(vis[x]==0) DFS(x);
+            if(vis[x]==0) DFS(x,ar,vis);
         }
     }
     int makeConnected(int n, vector<vector<int>>& a) {
         int p = a.size();
+        vector<vector<int>>ar(n);
+        vector<int>vis(n,0);
         for(int i=0;i<p;i++) {
             ar[a[i][0]].push_back(a[i][1]);
             ar[a[i][1]].push_back(a[i][0]);
@@ -17,7 +18,7 @@ public:
         int cc = 0;
         for(int i=0;i<n;i++) {
             if(vis[i]==0) {
-                DFS(i);
+                DFS(i,ar,vis);
                 cc++;
             }
         }
