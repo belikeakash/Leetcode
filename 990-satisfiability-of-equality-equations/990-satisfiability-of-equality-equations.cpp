@@ -1,39 +1,34 @@
 class Solution {
 public:
-    bool DFS(unordered_map<char,vector<char>>&m, char node, char t,unordered_map<char,int>&vis) {
+    void DFS(int node, vector<vector<int>>&ar, int c, vector<int>&vis, vector<int>&color) {
         vis[node] = 1;
-        bool ans = 0;
-        for(auto x:m[node]) {
-            
+        color[node] = c;
+        cout<<c<<" "<<node<<endl;
+        for(auto x:ar[node]) {
             if(vis[x]==0) {
-                cout<<x<<" ";
-                if(x==t) return 1;
-                ans = ans || DFS(m,x,t,vis);
+                DFS(x,ar,c,vis,color);
             }
         }
-        
-        return ans;
     }
     bool equationsPossible(vector<string>& v) {
-        int n = v.size();
-        vector<vector<int>>ar(n);
-        unordered_map<char,vector<char>>m;
+        vector<vector<int>>ar(26);
+        vector<int>color(26);
+        vector<int>vis(26);
+        
         for(auto x:v) {
-            string s = x;
-            // cout<<s<<" ";
-            if(s[1]=='=') {
-                m[s[0]].push_back(s[3]);
-                m[s[3]].push_back(s[0]);
+            if(x[1]=='=') {
+                ar[x[0]-'a'].push_back(x[3]-'a');
+                ar[x[3]-'a'].push_back(x[0]-'a');
             }
         }
-        unordered_map<char,int>vis;
+        int c = 0;
+        for(int i=0;i<26;i++) {
+            if(vis[i]==0) DFS(i,ar,c,vis,color);
+            c++;
+        }
         for(auto x:v) {
-            string s = x;
-            if(s[1]=='!') {
-                if(s[0]==s[3]) return 0;
-                vis.clear();
-                cout<<s[0]<<" "<<s[3]<<" ";
-                if(DFS(m,s[0],s[3],vis)) return 0;
+            if(x[1]=='!') {
+                if(color[x[0]-'a']==color[x[3]-'a']) return 0;
             }
         }
         return 1;
