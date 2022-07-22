@@ -15,31 +15,16 @@ public:
         // cout<<c<<endl;
         int i = 0,j = 0;
         int ans = 0;
-        while(i<=j && j<n) {
-            bool flag = 0;
-            // v[s[j]-'a']++;
-            for(int i=0;i<256;i++) {
-                if(v[i]>1) {flag = 1; break;}
-            }
-            // cout<<flag<<" ";
-            if(flag==1) {
+        while(j<n) {
+            v[s[j]]++;
+            while(v[s[j]]>1) {
                 v[s[i]]--;
                 i++;
-                
-                // cout<<i<<" ";
             }
-            else {
-                cout<<i<<"->"<<j<<" ";
-                v[s[j]]++;
-                ans = max(ans,j-i);
-                j++;
-            }
+            ans = max(ans,j-i+1);
+            j++;
         }
-        bool flag = 0;
-        for(int i=0;i<256;i++) {
-            if(v[i]>1) flag = 1;
-        }
-        if(flag == 0) ans = max(ans,j-i);
+        
         cout<<endl;
         return ans;
     }
