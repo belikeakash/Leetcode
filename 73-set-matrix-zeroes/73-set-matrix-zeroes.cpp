@@ -15,8 +15,8 @@ public:
                 }
             }
         }
-        for(auto x:s1) a1.push_back(x);
-        for(auto x:s2) a2.push_back(x);
+        for(auto x:s1) {a1.push_back(x);}
+        for(auto x:s2) {a2.push_back(x);}
         
         for(int i=0;i<a1.size();i++) {
             for(int j=0;j<m;j++) {
@@ -28,6 +28,10 @@ public:
                 a[j][a2[i]]=0;
             }
         }
+        a1.clear();
+        a2.clear();
+        s1.clear();
+        s2.clear();
         // return a;
     }
 };
