@@ -2,7 +2,7 @@ class Solution {
 public:
     int func(vector<int>&a, vector<int>&v, int c) {
         if(c>=a.size()-1) return 1;
-        if(a[c]==0) return 0;
+        // if(a[c]==0) return 0;
         if(v[c]!=-1) {return v[c];}
         
         for(int i=c+1;i<=c+a[c];i++) {
