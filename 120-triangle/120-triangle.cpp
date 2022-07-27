@@ -1,14 +1,21 @@
 class Solution {
 public:
-    int func(int i, int j, int n, int m, vector<vector<int>>& a, vector<vector<int>>& dp) {
-        if(i==n) return 0;
-        if(dp[i][j]!=INT_MIN) return dp[i][j];
-        return dp[i][j] =  a[i][j] + min(func(i+1,j,n,m,a,dp), func(i+1,j+1,n,m,a,dp));
-    }
+    
     int minimumTotal(vector<vector<int>>& a) {
         int n = a.size();
         int m = a[n-1].size();
-        vector<vector<int>>dp(n,vector<int>(m,INT_MIN));
-        return func(0,0,n,m,a,dp);
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        for(int i=n-1;i>=0;i--){
+            for(int j=a[i].size()-1;j>=0;j--) {
+                dp[i][j] = a[i][j] + min(dp[i+1][j],dp[i+1][j+1]);
+            }
+        }
+        for(int i=0;i<=n;i++) {
+            for(int j=0;j<=m;j++) {
+                cout<<dp[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+        return dp[0][0];
     }
 };
