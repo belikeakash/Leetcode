@@ -8,7 +8,7 @@ public:
     int minimumTotal(vector<vector<int>>& a) {
         int n = a.size();
         int m = a[n-1].size();
-        vector<vector<int>>dp(n+1,vector<int>(m+1,INT_MIN));
+        vector<vector<int>>dp(n,vector<int>(m,INT_MIN));
         return func(0,0,n,m,a,dp);
     }
 };
