@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<long long>>dp;
+    
     // int func(int i, int j, int n, int m, vector<vector<int>>& a) {
     //     if(i>=n ||j>=m) return 0;
     //     if(i==n-1 && j==m-1) return 1;
@@ -22,12 +22,12 @@ public:
         int n = a.size();
         int m = a[0].size();
         if(a[n-1][m-1]==1) return 0;
-        dp.resize(n+1,vector<long long>(m+1,1));
+        vector<vector<long long>>dp(n,vector<long long>(m,-1));
         for(int i=n-1;i>=0;i--) {
             for(int j=m-1;j>=0;j--) {
                 if(a[i][j]==1) {dp[i][j]=0;continue;}
                 if(i==n-1 && j==m-1) dp[i][j] = 1;
-                if(i<n-1 && j<m-1) {
+                else if(i<n-1 && j<m-1) {
                     dp[i][j] = dp[i+1][j] + dp[i][j+1];
                 }
                 else if(i==n-1) {
