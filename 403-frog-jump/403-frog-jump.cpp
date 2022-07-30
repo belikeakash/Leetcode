@@ -10,6 +10,7 @@ public:
         for(int i=0;i<a.size();i++) {
             if(a[x]+y==a[i]) {
                 ans = ans || func(i,y-1,a) || func(i,y,a) || func(i,y+1,a);
+                break;
             }
         }
         return m[x][y] = ans;
