@@ -5,7 +5,7 @@ public:
     int func(int i1, int j1, int i2, int n, vector<vector<int>>&a) {
         int j2 = i1+j1-i2;
         if(i1>=n || i2>=n || j1>=n || j2>=n || a[i1][j1]==-1 || a[i2][j2]==-1) return INT_MIN;
-        string s = to_string(i1)+"*"+to_string(i2)+"*"+to_string(j1)+"*"+to_string(j2);
+        string s = to_string(i1)+"*"+to_string(i2)+"*"+to_string(j1);
         int c = 0;
         if(m.count(s)) return m[s];
         if(i1==n-1 && j1==n-1) {
