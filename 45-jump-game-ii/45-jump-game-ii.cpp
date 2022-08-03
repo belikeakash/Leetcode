@@ -11,7 +11,7 @@ public:
         return dp[x] = ans;
     }
     int jump(vector<int>& a) {
-        if(a.size()==1) return 0;
+    //     if(a.size()==1) return 0;
         int n = a.size();
         dp.resize(a.size()+1,100009);
         dp[0] = 0;
