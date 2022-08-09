@@ -2,12 +2,12 @@ class Solution {
 public:
     bool canPlaceFlowers(vector<int>& a, int x) {
         int n = a.size();
-        if(n==1){
-          if(a[0]==1 && x==0) return 1;
-            if(a[0]==1 && x>0) return 0;
-            if(a[0]==0 && x==0) return 1;
-            if(a[0]==0 && x==1) return 1;
-        }
+        // if(n==1){
+        //   if(a[0]==1 && x==0) return 1;
+        //     if(a[0]==1 && x>0) return 0;
+        //     if(a[0]==0 && x==0) return 1;
+        //     if(a[0]==0 && x==1) return 1;
+        // }
         int i=0;
         int ans = 0;
         cout<<"a";
