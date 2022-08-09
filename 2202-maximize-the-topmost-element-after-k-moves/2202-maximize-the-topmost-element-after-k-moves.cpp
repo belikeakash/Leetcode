@@ -1,35 +1,37 @@
 class Solution {
 public:
     int maximumTop(vector<int>& a, int k) {
-        // int x= -1;
+        vector<int>b;
         if(k%2==1 && a.size()==1) return -1;
-        // else if(k>a.size() && a.size()==1) return -1;
-        int maxi = -1,maxp=-1;
-        for(int i=0;i<a.size();i++) {
-            if(a[i]>maxi){
-                maxi = a[i];
-                maxp = i;
+        if(k==0) return a[0];
+        int n= a.size();
+        cout<<n<<endl;
+        // k = min(n,k);
+        int x = k-1;
+        int maxi1 = -1;
+        int maxi2 = -1;
+        int pos = -1;
+        int i=0;
+        while(x-- && i<n) {
+            if(maxi1<a[i]) {
+                maxi2 = maxi1;
+                maxi1 = a[i];
+                pos = i;
             }
+            else if(maxi2<a[i]) maxi2 = a[i];
+            i++;
         }
-        cout<<maxp<<" ";
-        if(maxp==k) {cout<<"maxi"; return maxi;}
-        int x1 = -1,x2 = -1;
-        int n = a.size();
-        int f = min(k-1,n);
-        for(int i=0;i<f;i++) {
-            if(x1==-1) x1 = a[i];
-            else {
-                if(a[i]>x1) {
-                    x2 = x1;
-                    x1 = a[i];
-                }
-                else if(a[i]>x2) {
-                    x2 = a[i];
-                }
-            }
+        cout<<maxi1<<" "<<maxi2<<" "<<pos<<endl;
+        int ans = -1;
+        if(k-n>0) ans = maxi1;
+        else if(k-n==0) {
+            if(pos!=n-1) ans = maxi1;
+            else ans = maxi2;}
+        else {
+            cout<<"b";
+            if(i+1<n) ans = max(a[i+1],maxi1);
+            else{cout<<"a"; ans = maxi2; }
         }
-        if(k==1) return a[1];
-        if(k<n) return max(x1,a[k]);
-        else return x1;
+        return ans;
     }
 };
