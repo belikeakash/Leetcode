@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool lemonadeChange(vector<int>& a) {
-        map<int,int>m;
+        unordered_map<int,int>m;
         int n = a.size();
         for(int i=0;i<n;i++){
             m[a[i]]++;
