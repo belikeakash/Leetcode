@@ -7,9 +7,7 @@ public:
         for(int i=0;i<n;i++) {
             v.push_back({b[i],i});
         }
-        map<int,int>m;
         sort(v.begin(),v.end());
-        // for(int i=0;i<n;i++) v[i].first = i;
         sort(a.begin(),a.end());
         int p1 = 0;
         vector<int>c;
