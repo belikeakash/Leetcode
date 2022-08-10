@@ -6,7 +6,7 @@ public:
     bool carPooling(vector<vector<int>>& a, int p) {
         // sort(a.begin(),a.end(),cmp);
         int n = a.size();
-        map<int,int>m1,m2;
+        unordered_map<int,int>m1,m2;
         for(auto x:a) {
             m1[x[1]]+=x[0];
             m2[x[2]]+=x[0];
