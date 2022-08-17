@@ -1,50 +1,35 @@
 class Solution {
 public:
-    map<int, int> mp1, mp2;
-    int n, m;
-    vector<int> nums1,nums2;
-    
-    long long int dp[100002][2];
-    int mod =1e9+7;
-    
-    long long int solve(int i, int c){
-        if(c==0 && i>=n) return 0;
-        if(c==1 && i>=m) return 0;
-        
-        if(dp[i][c]!=-1) return dp[i][c];
-        
-        if(c){
-            if(mp1[nums2[i]]){
-                dp[i][c]=max(nums2[i]+solve(mp1[nums2[i]],c^1), nums2[i]+solve(i+1,c));
+    unordered_map<int,int>m1,m2;
+    vector<vector<long long>>dp;
+    long long func(int x,int i, int n, int m, vector<int>&a, vector<int>&b) {
+        if(i>=n && x==1) return 0;
+        if(i>=m && x==0) return 0;
+        long long ans1=0,ans2=0;
+        if(dp[i][x]!=-1) return dp[i][x];
+        if(x==1) {
+            if(m2.count(a[i])) {
+                ans1 = a[i] + max(func(x,i+1,n,m,a,b),func(!x,m2[a[i]],n,m,a,b));
             }
-            else {dp[i][c]=(long long int)nums2[i]+solve(i+1,c); }
+            else ans1 = a[i] + func(x,i+1,n,m,a,b);
         }
-        
-        else{
-            if( mp2[nums1[i]]){
-                dp[i][c]=max(nums1[i]+solve(mp2[nums1[i]],c^1), nums1[i]+solve(i+1,c));
+        else if(x==0) {
+            if(m1.count(b[i])) {
+                ans2 = b[i] + max(func(x,i+1,n,m,a,b),func(!x,m1[b[i]],n,m,a,b));
             }
-            else {dp[i][c]=(long long int)nums1[i]+solve(i+1,c);}
+            else ans2 = b[i] + func(x,i+1,n,m,a,b);
         }
-        return dp[i][c];
+        return dp[i][x] = max(ans1,ans2);
     }
-    
-    int maxSum(vector<int>& nums1, vector<int>& nums2) {
-        n=nums1.size();
-        m=nums2.size();
-        this->nums1 = nums1;
-        this->nums2 = nums2;
-        memset(dp,-1,sizeof dp);
-        
-        for(int i=0;i<n;i++){
-            mp1[nums1[i]] = i+1;
+    int maxSum(vector<int>& a, vector<int>& b) {
+        for(int i=a.size()-1;i>=0;i--) {
+            m1[a[i]]=i+1;
         }
-        for(int i=0;i<m;i++){
-            mp2[nums2[i]]=i+1;
+        for(int i=b.size()-1;i>=0;i--) {
+            m2[b[i]]=i+1;
         }
-        
-        long long int ans=max(solve(0,0), solve(0,1));
-        
-        return ans%mod;
+        dp.resize(100002,vector<long long>(2,-1));
+        long long ans = max(func(1,0,a.size(),b.size(),a,b),func(0,0,a.size(),b.size(),a,b))%1000000007;
+        return ans;
     }
 };
