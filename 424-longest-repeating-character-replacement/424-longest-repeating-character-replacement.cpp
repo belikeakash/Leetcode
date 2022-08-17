@@ -7,16 +7,17 @@ public:
         int maxi = 0;
         int ans = 0;
         int n = s.size();
-        unordered_map<char,int>m;
         while(j<n) {
-            m[s[j]]++;
-            maxi = max(maxi,m[s[j]]);
-            if(j-maxi-i + 1 > k) {
-                m[s[i]]--;
-                i++;
-             
+            v[s[j]-'A']++;
+            for(int u=0;u<26;u++) {
+                p = max(p,v[u]);
             }
-               ans = max(ans,j-i+1);
+            if(j-i+1-p>k) {
+                v[s[i]-'A']--;
+                i++;
+                
+            }
+            ans = max(ans,j-i+1);
             j++;
         }
         cout<<endl;
