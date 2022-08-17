@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maximumGroups(vector<int>& a) {
-        sort(a.begin(),a.end());
+        // sort(a.begin(),a.end());
         int n = a.size();
         int ans = 0;
         int i = 0;
