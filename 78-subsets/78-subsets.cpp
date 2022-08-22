@@ -3,14 +3,12 @@ public:
     vector<int>v;
     vector<vector<int>>ans;
     void func(int i, vector<int>&a) {
-        if(i==a.size()) {
-            ans.push_back(v);
-            return;
+        ans.push_back(v);
+        for(int j=i;j<a.size();j++) {
+            v.push_back(a[j]);
+            func(j+1,a);
+            v.pop_back();
         }
-        func(i+1,a);
-        v.push_back(a[i]);
-        func(i+1,a);
-        v.pop_back();
     }
     vector<vector<int>> subsets(vector<int>& a) {
         func(0,a);
