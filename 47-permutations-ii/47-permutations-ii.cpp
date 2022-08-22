@@ -1,12 +1,14 @@
 class Solution {
 public:
     vector<vector<int>>ans;
-    set<vector<int>>s;
+    
     vector<int>v;
     void func(int i, vector<int>&a) {
-        if(i==a.size()-1) {s.insert(a); return;}
+        if(i==a.size()-1) {ans.push_back(a); return;}
+        set<int>s;
         for(int j=i;j<a.size();j++) {
-            if(a[j]==a[i] && i!=j) continue;
+            if(s.count(a[j])==1) continue;
+            s.insert(a[j]);
             swap(a[i],a[j]);
             func(i+1,a);
             swap(a[i],a[j]);
@@ -15,7 +17,7 @@ public:
     vector<vector<int>> permuteUnique(vector<int>& a) {
         sort(a.begin(),a.end());
         func(0,a);
-        for(auto x:s) ans.push_back(x);
+        // for(auto x:s) ans.push_back(x);
         return ans;
     }
 };
