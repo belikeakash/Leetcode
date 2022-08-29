@@ -18,18 +18,18 @@ public:
         int l = 0; 
         int r = a[n-1]-a[0];
         int ans = -1;
-        while(l<r) {
+        while(l<=r) {
             int mid = l+(r-l)/2;
             int x = func(a,mid);
             if(x>=k) {
-                
-                r=mid;
+                ans=mid;
+                r=mid-1;
             }
             else {
                 l = mid+1;
             }
         }
-    return l;
+    return ans;
         
 //         for(int i=ans;i<=r;i++) {
 //             for(int j=i+1;j<r;j++) {
