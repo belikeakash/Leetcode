@@ -19,6 +19,7 @@ public:
                 }
                 
                 ans = max(ans,x+y+1);
+                i=r;
             }
         }
         return ans;
