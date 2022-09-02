@@ -15,7 +15,7 @@ public:
         priority_queue<int>q;
         int i = 0;
         while(k--) {
-            while(i<n && v[i].second<=w) {q.push(v[i++].first);}
+            while(i<n && v[i].second<=w) {q.push(v[i].first); i++;}
             if(!q.empty()) {
                 w+=q.top();
                 q.pop();
