@@ -16,11 +16,15 @@ public:
         if(root==NULL) return 0;
         int l = func(root->left);
         int r = func(root->right);
-        ans = max(ans,l+r+1);
-        return 1+max(l,r);
+        return 1 + max(l,r);
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        func(root);
-        return ans-1;
+        if(root==NULL) return 0;
+        int l = func(root->left);
+        int r = func(root->right);
+        ans = max(ans,l+r);
+        diameterOfBinaryTree(root->left);
+        diameterOfBinaryTree(root->right);
+        return ans;
     }
 };
