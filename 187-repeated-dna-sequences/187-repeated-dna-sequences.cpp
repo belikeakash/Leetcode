@@ -14,7 +14,7 @@ public:
             k+=s[i];
             k.erase(k.begin());
             m[k]++;
-            cout<<k<<endl;
+            // cout<<k<<endl;
         }
         for(auto x:m) {
             // cout<<x.first<<" "<<x.second<<endl;
