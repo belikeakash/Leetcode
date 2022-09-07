@@ -21,27 +21,26 @@
  */
 class Solution {
 public:
-    
     TreeNode* sortedListToBST(ListNode* head) {
-        
         if(head==NULL) return NULL;
-        
-        ListNode* a = head;
-        ListNode* b = head;
+        ListNode* slow = head;
+        ListNode* fast = head;
         ListNode* prev = NULL;
-        while(b && b->next) {
-            prev = a;
-            a=a->next;
-            b = b->next->next;
+        while(fast && fast->next) {
+            prev = slow;
+            slow = slow->next;
+            fast=fast->next->next;
         }
         if(prev==NULL) {
-            TreeNode* x = new TreeNode(head->val);
+            TreeNode* x = new TreeNode(slow->val);
             return x;
-        }; 
+        }
+        TreeNode* root = new TreeNode(slow->val);
+        
         prev->next = NULL;
-        TreeNode* root = new TreeNode(a->val);
         root->left = sortedListToBST(head);
-        root->right = sortedListToBST(a->next);
+        root->right = sortedListToBST(slow->next);
+        
         return root;
     }
 };
