@@ -24,21 +24,21 @@ public:
     }
     ListNode *detectCycle(ListNode *head) {
         if(head==NULL) return NULL;
-        int ans = findCycle(head);
-        if(ans == 0) return NULL;
+        // int ans = findCycle(head);
+        // if(ans == 0) return NULL;
         unordered_map<ListNode*,int>m;
         ListNode* temp = head;
         int c = 0;
         // cout<<c<<endl;
         while(temp) {
-            cout<<"-";
+            // cout<<"-";
             if(m[temp]) {cout<<temp->val<<endl; return temp;}
             m[temp]=1;
-            c++;
+            // c++;
             temp=temp->next;
         }
-        cout<<"a";
-        cout<<endl;
-        return head;
+        // cout<<"a";
+        // cout<<endl;
+        return NULL;
     }
 };
