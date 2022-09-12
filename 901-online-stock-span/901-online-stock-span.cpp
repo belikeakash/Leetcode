@@ -2,7 +2,7 @@ class StockSpanner {
 public:
     stack<pair<int,int>>s;
     StockSpanner() {
-        cout<<s.size();
+        // cout<<s.size();
     }
     
     int next(int x) {
@@ -10,11 +10,11 @@ public:
         int y = 0;
         int ans = 1;
         while(s.size() > 0 && x>=s.top().first) {
-            cout<<"a";
+            // cout<<"a";
             ans+=s.top().second;
             s.pop();
         }
-        cout<<endl;
+        // cout<<endl;
         s.push({x,ans});
         return ans;
     }
