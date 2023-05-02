@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& a) {
         int n = a.size();
-        int c1=0,n1=-1,c2=0,n2=-1;
+        int c1=0,n1,c2=0,n2;
         for(int i=0;i<n;i++) {
             if(a[i]==n1) {
                 c1++;
