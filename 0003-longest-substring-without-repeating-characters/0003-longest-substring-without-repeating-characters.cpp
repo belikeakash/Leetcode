@@ -25,7 +25,7 @@ public:
                     }
                 }
             } 
-            cout<<i<<" "<<j<<endl;
+            //cout<<i<<" "<<j<<endl;
             ans = max(ans,j-i+1);
             j++;
         }
