@@ -9,7 +9,7 @@ public:
             while(j<n-p && a[j]==a[i]) {
                 j++;
             }
-            cout<<j<<" ";
+            //cout<<j<<" ";
             if(j!=i+1 && j<n) {
                 int u = j-i-1;
                 p+=u;
@@ -23,8 +23,8 @@ public:
             }
             
         }
-        cout<<p<<" ";
-        cout<<endl;
+        // cout<<p<<" ";
+        // cout<<endl;
         i = 0;
         int cnt = 1;
         // for(int x=0;x<n;x++) {
