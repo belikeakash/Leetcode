@@ -7,11 +7,11 @@ public:
             ans.push_back(v);
             return;
         }
-        for(int j=i;j<n;j++) {
-                v.push_back(a[j]);
-                func(j,n,a,x-a[j],v);
-                v.pop_back();
-        }
+        if(i>=n) return;
+        v.push_back(a[i]);
+        func(i,n,a,x-a[i],v);
+        v.pop_back();
+        func(i+1,n,a,x,v);
     }
     vector<vector<int>> combinationSum(vector<int>& a, int x) {
         vector<int>v;
