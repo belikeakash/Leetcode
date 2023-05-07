@@ -1,17 +1,39 @@
 class Solution {
 public:
-    string getPermutation(int n, int k) {
+    string getPermutation(int n, int p) {
         string s = "";
+        vector<int>a(n);
         for(int i=1;i<=n;i++) {
-            s+=to_string(i);
+            a[i-1] = i;
         }
-        cout<<s<<endl;
-        while(k>1) {
-            next_permutation(s.begin(),s.end());
-            //cout<<s<<" ";
-            k--;
+        // p = 1;
+        // p = 9;
+        p--;
+        while(p--) {
+            for(int i=n-1;i>0;i--) {
+                if(a[i]>a[i-1]) {
+                    int j = i-1;
+                    for(int k=n-1;i>=0;k--) {
+                        if(a[k]>a[j]) {
+                            swap(a[k],a[j]);
+                            //cout<<"k"<<k<<endl;
+                            break;
+                        }
+                        
+                    }
+                    // cout<<"i"<<i<<endl;
+                    // cout<<"j"<<j<<endl;
+                    reverse(a.begin()+i,a.end());
+                    break;
+                }
+            }
         }
-        
-        return s;
+        //cout<<endl;
+        string ans = "";
+        for(auto x:a) {
+            ans+=to_string(x);
+        }
+        //cout<<endl;
+        return ans;
     }
 };
