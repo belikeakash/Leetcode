@@ -1,16 +1,15 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
-    int mininsertions(string&s, int si, int ei){
-        if(dp[si][ei]!=-1)return dp[si][ei];
-        if(si>=ei)return 0;
-        if(s[si]==s[ei]){
-            return dp[si][ei]=mininsertions(s,si+1,ei-1);
-        }
-        return dp[si][ei]=1+min(mininsertions(s,si+1,ei),mininsertions(s,si,ei-1));
+    
+    int func(int i, int j, string &s, vector<vector<int>>&dp) {
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(i>=j) return 0;
+       
+        if(s[i]==s[j]) return dp[i][j] =  func(i+1,j-1,s, dp);
+        else return dp[i][j] =  1 + min(func(i+1,j,s,dp), func(i,j-1,s,dp));
     }
     int minInsertions(string s) {
-        dp.resize(s.size()+1, vector<int>(s.size()+1,-1));
-        return mininsertions(s,0,s.size()-1);
+        vector<vector<int>>dp(s.size()+3, vector<int>(s.size()+3, -1));
+        return func(0,s.size()-1,s, dp);
     }
 };
