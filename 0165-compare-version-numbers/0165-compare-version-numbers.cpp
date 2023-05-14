@@ -19,7 +19,7 @@ public:
         //     if(x.size()<y.size()) x+=p;
         //     else y+=p;
         // }
-        cout<<x<<" "<<y<<"+"<<endl;
+        //cout<<x<<" "<<y<<"+"<<endl;
         if(x==y) return 0;
         else if(x>y) {return 1;}
         return -1;
@@ -38,7 +38,7 @@ public:
             else if(!flag1 && i<n && s1[i]!='.') {a+=s1[i]; i++;}
             if((j< m && s2[j]=='.') || j>=m) {flag2 = 1; j++;}
             else if(!flag2 && j<m && s2[j]!='.') {b+=s2[j]; j++;}
-            cout<<a<<" "<<b<<endl;
+            //cout<<a<<" "<<b<<endl;
             if(flag1 && flag2) {
                 //cout<<a<<" "<<b<<" "<<i<<" "<<j<<endl;
                 ans = compare(a, b);
@@ -52,7 +52,7 @@ public:
         //cout<<a<<" "<<b<<endl;
         ans = compare(a,b);
         //cout<<ans<<endl;
-        cout<<endl;
+        //cout<<endl;
         return ans;
     }
 };
