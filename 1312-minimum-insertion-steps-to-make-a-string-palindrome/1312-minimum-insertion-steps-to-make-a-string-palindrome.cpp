@@ -1,21 +1,16 @@
 class Solution {
 public:
-    int longestPalindromeSubstring(string& s, int i, int j, vector<vector<int>>& memo) {
-        if (i > j)
-            return 0;
-        else if (i == j)
-            return 1;
-        else if (memo[i][j] != -1)
-            return memo[i][j];
-        else if (s[i] == s[j])
-            return memo[i][j] = 2 + longestPalindromeSubstring(s, i+1, j-1, memo);
-        else
-            return memo[i][j] = max(longestPalindromeSubstring(s, i+1, j, memo), longestPalindromeSubstring(s, i, j-1, memo));
+    int dp[510][510];
+    int mininsertions(string&s, int si, int ei){
+        if(dp[si][ei]!=-1)return dp[si][ei];
+        if(si>=ei)return 0;
+        if(s[si]==s[ei]){
+            return dp[si][ei]=mininsertions(s,si+1,ei-1);
+        }
+        return dp[si][ei]=1+min(mininsertions(s,si+1,ei),mininsertions(s,si,ei-1));
     }
     int minInsertions(string s) {
-        int n = s.length();
-        vector<vector<int>> memo(n, vector<int>(n, -1));
-        int minNumSteps = n - longestPalindromeSubstring(s, 0, n-1, memo);
-        return minNumSteps;
+        memset(dp,-1,sizeof(dp));
+        return mininsertions(s,0,s.size()-1);
     }
 };
