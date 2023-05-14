@@ -1,15 +1,25 @@
 class Solution {
 public:
-    
-    int func(int i, int j, string &s, vector<vector<int>>&dp) {
-        if(dp[i][j]!=-1) return dp[i][j];
+    vector<vector<int>>dp;
+    int func(int i, int j, string s) {
         if(i>=j) return 0;
-       
-        if(s[i]==s[j]) return dp[i][j] =  func(i+1,j-1,s, dp);
-        else return dp[i][j] =  1 + min(func(i+1,j,s,dp), func(i,j-1,s,dp));
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s[i]==s[j]) return dp[i][j] =  func(i+1,j-1,s);
+        return dp[i][j] =  1 + min(func(i+1,j,s), func(i,j-1,s));
     }
     int minInsertions(string s) {
-        vector<vector<int>>dp(s.size()+3, vector<int>(s.size()+3, -1));
-        return func(0,s.size()-1,s, dp);
+        dp.resize(s.size()+1, vector<int>(s.size()+1, 0));
+        //return func(0,s.size()-1,s);
+        int n = s.size();
+        for(int i=n-2;i>=0;i--) {
+            for(int j=i+1;j<n;j++) {
+                if(s[i]==s[j]) dp[i][j] = dp[i+1][j-1];
+                else {
+                    dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp[0][n-1];
     }
 };
