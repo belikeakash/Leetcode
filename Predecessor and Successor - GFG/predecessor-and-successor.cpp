@@ -108,18 +108,26 @@ struct Node
 // This function finds predecessor and successor of key in BST.
 // It sets pre and suc as predecessor and successor respectively
 
-void func(Node* root, Node*& pre, Node*& suc, int &mini, int &maxi, int key) {
-    if(!root) return;
-    if(root->key < key && root->key > mini) {
-        mini = root->key;
-        pre = root;
-    }
-    if(root->key > key && root->key < maxi) {
-        maxi = root->key;
+void sucx(Node* root, Node* &suc, int key) {
+    if(root==NULL) return;
+    if(root->key > key) {
         suc = root;
+        sucx(root->left, suc, key);
+        return;
     }
-    func(root->left, pre, suc, mini, maxi, key);
-    func(root->right, pre, suc, mini, maxi, key);
+    sucx(root->right, suc, key);
+    
+}
+
+void prex(Node* root, Node* &pre, int key) {
+    if(root==NULL) return;
+    if(root->key < key) {
+        pre = root;
+        prex(root->right, pre, key);
+        return;
+    }
+    prex(root->left, pre, key);
+    
 }
 
 
@@ -130,5 +138,6 @@ void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
     int maxi = 1e6+3;
     pre = NULL;
     suc = NULL;
-    func(root, pre, suc, mini, maxi, key);
+    sucx(root, suc, key);
+    prex(root, pre, key);
 }
