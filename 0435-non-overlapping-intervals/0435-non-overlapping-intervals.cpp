@@ -8,17 +8,18 @@ public:
         int n = a.size();
         sort(a.begin(), a.end(), cmp);
         int s = a[0][0], e = a[0][1];
-        int cnt = 0;
+        int cnt =1;
         for(int i=1;i<n;i++) {
-            if(a[i][0]<e) {
+            if(a[i][0]>=e) {
                 cnt++;
+                e = max(e, a[i][1]);
             }
-            else {
-                s = a[i][0];
-                e = a[i][1];
-            }
+            // else {
+            //     s = a[i][0];
+            //     e = a[i][1];
+            // }
         }
         
-        return cnt;
+        return a.size() - cnt;
     }
 };
