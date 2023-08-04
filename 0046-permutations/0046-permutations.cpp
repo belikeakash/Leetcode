@@ -1,20 +1,20 @@
 class Solution {
 public:
-    vector<vector<int>>ans;
-    void func(int i, vector<int>&a, vector<int>v) {
-        if(i==a.size()) {
+    void func(int idx, vector<int>&a, vector<vector<int>>&ans) {
+        if(idx==a.size()) {
             ans.push_back(a);
             return;
         }
-        for(int j=i;j<a.size();j++) {
-            swap(a[i],a[j]);
-            func(i+1,a,v);
-            swap(a[i],a[j]);
+        for(int i=idx;i<a.size();i++) {
+            swap(a[i], a[idx]);
+            func(idx+1, a, ans);
+            swap(a[i], a[idx]);
         }
     }
     vector<vector<int>> permute(vector<int>& a) {
-        vector<int>v;
-        func(0,a,v);
+        vector<vector<int>>ans;
+        func(0, a, ans);
+        
         return ans;
     }
 };
