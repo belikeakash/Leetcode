@@ -11,7 +11,8 @@ public:
                 ans = min(ans, abs(a[i]-*c));
             }
             if(c!=s.begin()) {
-                ans = min(ans, abs(a[i]-*prev(c)));
+                --c;
+                ans = min(ans, abs(a[i]-*(c)));
             }
         }
         
