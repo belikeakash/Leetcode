@@ -11,17 +11,10 @@ public:
         
         //for(auto x:m) cout<<x.first<<" "<<x.second.size()<<endl;
         int ans = 0;
-        unordered_map<int, int>m2;
-        for(int i=0;i<n;i++) {
-            for(int j=i+1;j<n;j++) {
-                int c = a[i]*a[j];
-                if(a[i]!=a[j] && m[c].size()>1 && !m2[c]) {
-                    int u = m[c].size();
-                    int x = (u*(u-1))/2;
-                    m2[c]=1;
-                    ans+=(x)*8;
-                }
-            }
+        for(auto x:m) {
+            int c = x.second.size();
+            int u = ((c*(c-1))/2)*8;
+            ans+=u;
         }
         
         return ans;
