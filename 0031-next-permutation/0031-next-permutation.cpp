@@ -2,27 +2,25 @@ class Solution {
 public:
     void nextPermutation(vector<int>& a) {
         int n = a.size();
-        int j = n-1;
-        while(j>0) {
-            if(a[j]>a[j-1]) {
-                break;
-            }
+        int i = n-1;
+        while(i>0) {
+            if(a[i]<=a[i-1]) i--;
             else {
-                j--;
+                
+                int j = i;
+                int pos = j;
+                while(j<n && a[j]>a[i-1]) {
+                    if(a[j]<a[pos]) {
+                        pos = j;
+                    }
+                    j++;
+                }
+                //cout<<i<<" "<<pos;
+                swap(a[i-1], a[pos]);
+                sort(a.begin()+i, a.end());
+                return;
             }
         }
-        int i = j;
-        cout<<i<<" ";
-        for(int x=n-1;x>=i;x--) {
-            if(j-1>=0 && a[x]>a[j-1]) {
-                swap(a[x],a[j-1]);
-                cout<<"a"<<" ";
-                break;
-            }
-        }
-        cout<<i<<endl;
-        for(int x=0;x<(n-i)/2;x++) {
-            swap(a[x+i],a[n-x-1]);
-        }
+        reverse(a.begin(), a.end());
     }
 };
