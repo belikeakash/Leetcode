@@ -10,14 +10,14 @@ public:
                 int j = i;
                 int pos = j;
                 while(j<n && a[j]>a[i-1]) {
-                    if(a[j]<a[pos]) {
+                    if(a[j]<=a[pos]) {
                         pos = j;
                     }
                     j++;
                 }
                 //cout<<i<<" "<<pos;
                 swap(a[i-1], a[pos]);
-                sort(a.begin()+i, a.end());
+                reverse(a.begin()+i, a.end());
                 return;
             }
         }
