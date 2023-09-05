@@ -20,7 +20,6 @@ public:
         Node* dummy = new Node(-1);
         Node* dummyT = dummy;
         Node* temp = head;
-        int u = 0;
         unordered_map<Node*, Node*>m;
         while(temp) {
             Node* c = new Node(temp->val);
@@ -28,26 +27,19 @@ public:
             m[temp] = c;
             temp=temp->next;
             dummyT=dummyT->next;
-            u++;
         }
         dummyT = dummy->next;
         temp = head;
-        u = 0;
         while(dummyT) {
-            //cout<<dummyT->val<<" ";
             if(!temp->random) dummyT->random = NULL;
-            else {cout<<temp->random->val<<" "; 
+            else { 
                 dummyT->random = m[temp->random];
             }
             temp=temp->next;
             dummyT = dummyT->next;
-            u++;
         }
         dummy = dummy->next;
-        // while(dummy) {
-        //     cout<<dummy->random->val<<" ";
-        //     dummy=dummy->next;
-        // }
+        
         return dummy;
     }
 };
